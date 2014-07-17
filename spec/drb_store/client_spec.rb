@@ -14,7 +14,7 @@ describe DRbStore::Client do
   describe "#initialize" do
     context "no DRbStore::Server running" do
       it "raises an error" do
-        expect{ DRbStore::Client.new("druby://nonexistent:5992") }.to raise_error
+        expect{ DRbStore::Client.new("druby://localhost:54985") }.to raise_error
       end
     end
   end
