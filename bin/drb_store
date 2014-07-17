@@ -1,0 +1,3 @@
+require_relative "../lib/drb_store"
+
+DrbStore::Server.new.start!

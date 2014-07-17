@@ -7,6 +7,11 @@ module DrbStore
       @store = {}
     end
 
+    def start!
+      DRb.start_service("druby://localhost:5992", self)
+      DRb.thread.join
+    end
+
     def write(key,value)
       @store[key] = value
     end
