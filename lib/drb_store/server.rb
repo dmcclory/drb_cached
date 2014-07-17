@@ -1,5 +1,5 @@
 
-module DrbStore
+module DRbStore
 
   class Server
 
