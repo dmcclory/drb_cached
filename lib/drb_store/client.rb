@@ -4,6 +4,7 @@ module DrbStore
     def initialize(address)
       @address = address
       @server = DRbObject.new_with_uri(@address)
+      @server.status
     end
 
     def write(key, value)

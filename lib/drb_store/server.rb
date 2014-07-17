@@ -28,5 +28,9 @@ module DrbStore
       return true unless @store.keys.include? key
       @store.delete key
     end
+
+    def status
+      "running"
+    end
   end
 end
