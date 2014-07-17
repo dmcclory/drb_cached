@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
 require_relative "../lib/drb_cached"
 
+puts "DRbCached: Server started at localhost:5992"
 DRbCached::Server.new.start!

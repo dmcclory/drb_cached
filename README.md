@@ -1,6 +1,23 @@
 # DrbStore
 
-TODO: Write a gem description
+A simple implementation of the ActiveSupport::Cache::Store interface using DRb.
+
+### usage
+
+Add the store to your Rails config:
+
+```
+# rails config
+
+config.cache_store = [:drb_cached]
+```
+
+start a DRbCached::Server
+
+```
+# from the repo directory
+$ bundle exec bin/drb_store
+```
 
 ## Installation
 
@@ -15,10 +32,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install drb_store
-
-## Usage
-
-TODO: Write usage instructions here
 
 ## Contributing
 
