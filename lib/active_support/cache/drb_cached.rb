@@ -1,11 +1,15 @@
 require 'forwardable'
 
 module ActiveSupport
+  Inflector.inflections(:en) do |inflect|
+    inflect.acronym "DRb"
+  end
+
   module Cache
-    class DRbStore
+    class DRbCached
       extend Forwardable
       def initialize
-        @client = ::DRbStore::Client.new("druby://localhost:5992")
+        @client = ::DRbCached::Client.new("druby://localhost:5992")
       end
       def_delegators :@client, :read, :write, :exist?, :fetch, :delete
     end

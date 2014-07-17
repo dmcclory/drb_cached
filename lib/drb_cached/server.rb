@@ -1,5 +1,5 @@
 
-module DRbStore
+module DRbCached
 
   class Server
 

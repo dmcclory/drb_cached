@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe DRbStore::Client do
-  let(:client) { DRbStore::Client.new("druby://localhost:5992") }
+describe DRbCached::Client do
+  let(:client) { DRbCached::Client.new("druby://localhost:5992") }
 
   before do
     start_server
@@ -12,9 +12,9 @@ describe DRbStore::Client do
   end
 
   describe "#initialize" do
-    context "no DRbStore::Server running" do
+    context "no DRbCached::Server running" do
       it "raises an error" do
-        expect{ DRbStore::Client.new("druby://localhost:54985") }.to raise_error
+        expect{ DRbCached::Client.new("druby://localhost:54985") }.to raise_error
       end
     end
   end

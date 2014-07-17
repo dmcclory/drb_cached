@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'drb_store/version'
+require 'drb_cached/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "drb_store"
-  spec.version       = DrbStore::VERSION
+  spec.name          = "drb_cached"
+  spec.version       = DRbCached::VERSION
   spec.authors       = ["Dan McClory"]
   spec.email         = ["danmcclory@gmail.com"]
   spec.summary       = %q{TODO: Write a short summary. Required.}

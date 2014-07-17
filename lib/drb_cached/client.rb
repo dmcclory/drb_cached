@@ -1,5 +1,5 @@
 require 'drb/drb'
-module DRbStore
+module DRbCached
   class Client
     def initialize(address)
       @address = address

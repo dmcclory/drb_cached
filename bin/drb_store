@@ -1,3 +1,3 @@
-require_relative "../lib/drb_store"
+require_relative "../lib/drb_cached"
 
-DRbStore::Server.new.start!
+DRbCached::Server.new.start!
