@@ -31,6 +31,14 @@ describe DRbCached::Client do
           expect(client.read("missing")).to eq nil
         end
       end
+
+      context "with an :expires_in option" do
+        it "deletes the value after the expiration time" do
+          client.write("foo", 500, expires_in: 0.01)
+          sleep 0.01
+          expect(client.read("foo")).to eq nil
+        end
+      end
     end
 
     describe "#exist?" do

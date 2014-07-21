@@ -12,12 +12,20 @@ module DRbCached
       DRb.thread.join
     end
 
-    def write(key,value)
-      @store[key] = value
+    def write(key,value, options = {})
+      expires = options[:expires_in] ? Time.now + options[:expires_in] : :never
+      @store[key] = {value: value, expires_in: expires}
     end
 
     def read(key)
-      @store[key]
+      temp = @store[key]
+      return nil if temp.nil?
+      if should_expire?(temp, Time.now)
+        @store.delete(:key)
+        return nil
+      else
+        @store[key][:value]
+      end
     end
 
     def exist?(key)
@@ -26,11 +34,17 @@ module DRbCached
 
     def delete(key)
       return true unless @store.keys.include? key
-      @store.delete key
+      @store.delete(key)[:value]
     end
 
     def status
       "running"
+    end
+
+    private
+    def should_expire?(entry, time)
+      return false if entry[:expires_in] == :never
+      entry[:expires_in] && entry[:expires_in] < time
     end
   end
 end

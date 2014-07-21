@@ -7,8 +7,8 @@ module DRbCached
       @server.status
     end
 
-    def write(key, value)
-      @server.write key, value
+    def write(key, value, options = {})
+      @server.write key, value, options
     end
 
     def read(key)
