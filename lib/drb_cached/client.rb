@@ -1,8 +1,9 @@
 require 'drb/drb'
 module DRbCached
   class Client
-    def initialize(address)
-      @address = address
+    def initialize(addresses)
+      @addresses = Array[addresses]
+      @address = @addresses.first
       @server = DRbObject.new_with_uri(@address)
       @server.status
     end
