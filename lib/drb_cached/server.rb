@@ -3,14 +3,15 @@ module DRbCached
 
   class Server
 
-    def initialize(options = {})
+    def initialize(host, options = {})
       @store = {}
       @options = options
+      @host = host
       @cache_limit = @options[:cache_limit] || 10000
     end
 
     def start!
-      DRb.start_service("druby://localhost:5992", self)
+      DRb.start_service(@host, self)
       DRb.thread.join
     end
 

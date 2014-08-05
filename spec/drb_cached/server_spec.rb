@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe DRbCached::Server do
-  let(:server) { DRbCached::Server.new(options) }
+  let(:server) { DRbCached::Server.new(host, options) }
   let(:options) { {} }
+  let(:host)    { "druby://localhost:5992" }
 
   describe "least-recently used deletion" do
     let(:options) { { cache_limit: 2 } }
