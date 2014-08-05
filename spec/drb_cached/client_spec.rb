@@ -14,7 +14,7 @@ describe DRbCached::Client do
   describe "#initialize" do
     context "no DRbCached::Server running" do
       it "raises an error" do
-        expect{ DRbCached::Client.new("druby://localhost:54985") }.to raise_error
+        expect{ DRbCached::Client.new("druby://localhost:54985").status }.to raise_error
       end
     end
   end
