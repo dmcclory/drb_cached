@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 require_relative "../lib/drb_cached"
 
-puts "DRbCached: Server started at localhost:5992"
-DRbCached::Server.new("druby://localhost:5992").start!
+uri = ARGV[0] || "druby://localhost:5992"
+
+puts "DRbCached: Server started at#{uri}"
+DRbCached::Server.new(uri).start!
