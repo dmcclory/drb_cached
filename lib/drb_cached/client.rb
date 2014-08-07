@@ -2,8 +2,9 @@ require 'drb/drb'
 module DRbCached
   class Client
     def initialize(addresses)
-      @addresses = Array[addresses]
+      @addresses = Array[addresses].flatten
       @servers = @addresses.map { |address| DRbObject.new_with_uri(address) }
+      @node_set = NodeSet.new(@servers, 200)
     end
 
     def write(key, value, options = {})
@@ -36,7 +37,8 @@ module DRbCached
     end
 
     def server_for(key)
-      @servers.first
+      hash = ConsistentHash.hash(key)
+      @node_set.node_for(hash)
     end
   end
 end

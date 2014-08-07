@@ -15,6 +15,10 @@ module DRbCached
       DRb.thread.join
     end
 
+    def start
+      DRb.start_service(@host, self)
+    end
+
     def write(key,value, options = {})
       access_time = Time.now
       expires = options[:expires_in] ? access_time + options[:expires_in] : :never
@@ -51,6 +55,14 @@ module DRbCached
 
     def full?
       @store.keys.count >= @cache_limit
+    end
+
+    def stats
+      { count: @store.keys.count }
+    end
+
+    def to_s
+      "<DRbCached::Server @host=#{@host}>"
     end
 
     private
