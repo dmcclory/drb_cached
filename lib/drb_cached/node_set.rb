@@ -1,5 +1,6 @@
 module DRbCached
   class Node
+    attr_reader :name
     def initialize(name, virtual_node_count = 0)
       @name = name
       @virtual_node_count = virtual_node_count
@@ -18,9 +19,9 @@ module DRbCached
   class NodeSet
     attr_reader :nodes
 
-    def initialize(count = 1, virtual_node_count = 1)
+    def initialize(nodes, virtual_node_count = 1)
       @virtual_node_count = virtual_node_count
-      @nodes = (0..count-1).map do |n|
+      @nodes = nodes.map do |n|
         virtual_node_count.times.map do |vn|
           Node.new(n,vn)
         end
@@ -33,7 +34,7 @@ module DRbCached
 
     def node_for(hash)
       target = @nodes.select { |node| node.key > hash.to_i(16) }.first
-      target.nil? ? @nodes.first : target
+      target.nil? ? @nodes.first.name : target.name
     end
 
     def add(node_name)
@@ -51,11 +52,11 @@ module DRbCached
     end
 
     def first
-      @nodes.first
+      @nodes.first.name
     end
 
     def last
-      @nodes.last
+      @nodes.last.name
     end
   end
 end

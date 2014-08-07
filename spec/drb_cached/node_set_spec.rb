@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe DRbCached::NodeSet do
 
-  let(:count)    { 10 }
-  let(:node_set) { DRbCached::NodeSet.new(count) }
+  let(:nodes)    { (0..9).to_a }
+  let(:node_set) { DRbCached::NodeSet.new(nodes) }
 
   describe "#initialize" do
     it "is a bunch of nodes" do
@@ -18,7 +18,7 @@ describe DRbCached::NodeSet do
 
     context "adding virtual nodes" do
       let(:virtual_node_count) { 10 }
-      let(:node_set) { DRbCached::NodeSet.new(count, virtual_node_count) }
+      let(:node_set) { DRbCached::NodeSet.new(nodes, virtual_node_count) }
       it "adds multiple points for each node" do
         expect(node_set.length).to eq 100
       end
@@ -48,7 +48,7 @@ describe DRbCached::NodeSet do
 
     context "multiple virtual nodes" do
       let(:virtual_node_count) { 10 }
-      let(:node_set) { DRbCached::NodeSet.new(count, virtual_node_count) }
+      let(:node_set) { DRbCached::NodeSet.new(nodes, virtual_node_count) }
 
       it "adds multiple virtual nodes for the new node" do
         node_set.add(11)
@@ -70,7 +70,7 @@ describe DRbCached::NodeSet do
 
     context "multiple virtual nodes" do
       let(:virtual_node_count) { 10 }
-      let(:node_set) { DRbCached::NodeSet.new(count, virtual_node_count) }
+      let(:node_set) { DRbCached::NodeSet.new(nodes, virtual_node_count) }
 
       it "removes each virtual node for the target node" do
         node_set.remove(node)
